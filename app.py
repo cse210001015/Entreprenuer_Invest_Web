@@ -40,23 +40,42 @@ if choice == 'Sign Up':
     submit = st.sidebar.button('Create Account')
 
     if submit :
-        user = auth.create_user_with_email_and_password(email,password)
-        st.success('Your account has been created successfully')
-        st.balloons()
-        # Sign In
-        user = auth.sign_in_with_email_and_password(email,password)
-        db.child(user['localId']).child("Handle").set(handle)
-        db.child(user['localId']).child("Id").set(user['localId'])
-        st.title('Welcome ' + handle)
-        st.info('Login via login drop down')
+        try:
+            user = auth.create_user_with_email_and_password(email,password)
+            st.success('Your account has been created successfully')
+            st.balloons()
+            # Sign In
+            user = auth.sign_in_with_email_and_password(email,password)
+            db.child(user['localId']).child("Handle").set(handle)
+            db.child(user['localId']).child("Id").set(user['localId'])
+            st.title('Welcome ' + handle)
+            st.info('Login via login drop down')
+        except Exception as e:
+            e=str(e)
+            e=e.split('{')
+            e=e[3]
+            e=str(e)
+            e=e.split(',')
+            e=e[0]
+            e=str(e)
+            e=e.split(':')
+            e=e[1]
+            e=str(e)
+            e=e.split('"')
+            e=e[1]
+            e=str(e)
+            e=e.replace('_',' ')   
+            st.sidebar.header(e)
 
 if choice=='Login':
     login = st.sidebar.button('Login')
     if login:
         try:
             user=auth.sign_in_with_email_and_password(email,password)
-            st.balloons()
+            bio = st.radio('Jump to',['Home','My feed','Settings'])
+
         except:
             st.sidebar.header("Invalid Credentials")
+    
+    
 
-        bio = st.radio('Jump to',['Home','My feed','Settings'])
