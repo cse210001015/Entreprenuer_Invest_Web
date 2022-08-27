@@ -55,5 +55,6 @@ if choice=='Login':
     if login:
         try:
             user=auth.sign_in_with_email_and_password(email,password)
+            st.balloons()
         except:
-            st.sidebar.header("Invalid Credentials")
+            st.sidebar.header("Invalid Credentials")        
