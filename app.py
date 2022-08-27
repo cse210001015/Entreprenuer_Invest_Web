@@ -51,10 +51,9 @@ if choice == 'Sign Up':
         st.info('Login via login drop down')
 
 if choice=='Login':
-    login=st.sidebar.checkbox('Login')
+    login = st.sidebar.button('Login')
     if login:
-        user=auth.sign_in_with_email_and_password(email,password)
-        
-        
-        
-        #hello
+        try:
+            user=auth.sign_in_with_email_and_password(email,password)
+        except:
+            st.sidebar.header("Invalid Credentials")
