@@ -76,6 +76,3 @@ if choice=='Login':
 
         except:
             st.sidebar.header("Invalid Credentials")
-    
-    
-
