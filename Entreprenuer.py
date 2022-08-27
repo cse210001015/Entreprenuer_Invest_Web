@@ -3,6 +3,7 @@ import streamlit as st
 from datetime import datetime
 
 
+
 # Configuration Key
 firebaseConfig = {
     'apiKey': "AIzaSyCrji1YWuk7Vgww8ReFlqoPjx9vsh-ZBls",
@@ -40,32 +41,15 @@ if choice == 'Sign Up':
     submit = st.sidebar.button('Create Account')
 
     if submit :
-        try:
-            user = auth.create_user_with_email_and_password(email,password)
-            st.success('Your account has been created successfully')
-            st.balloons()
-            # Sign In
-            user = auth.sign_in_with_email_and_password(email,password)
-            db.child(user['localId']).child("Handle").set(handle)
-            db.child(user['localId']).child("Id").set(user['localId'])
-            st.title('Welcome ' + handle)
-            st.info('Login via login drop down')
-        except Exception as e:
-            e=str(e)
-            e=e.split('{')
-            e=e[3]
-            e=str(e)
-            e=e.split(',')
-            e=e[0]
-            e=str(e)
-            e=e.split(':')
-            e=e[1]
-            e=str(e)
-            e=e.split('"')
-            e=e[1]
-            e=str(e)
-            e=e.replace('_',' ')   
-            st.sidebar.header(e)
+        user = auth.create_user_with_email_and_password(email,password)
+        st.success('Your account has been created successfully')
+        st.balloons()
+        # Sign In
+        user = auth.sign_in_with_email_and_password(email,password)
+        db.child(user['localId']).child("Handle").set(handle)
+        db.child(user['localId']).child("Id").set(user['localId'])
+        st.title('Welcome ' + handle)
+        st.info('Login via login drop down')
 
 if choice=='Login':
     login = st.sidebar.button('Login')
@@ -73,9 +57,6 @@ if choice=='Login':
         try:
             user=auth.sign_in_with_email_and_password(email,password)
             bio = st.radio('Jump to',['Home','My feed','Settings'])
-
+            
         except:
             st.sidebar.header("Invalid Credentials")
-    
-    
-
