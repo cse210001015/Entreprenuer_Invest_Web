@@ -72,7 +72,15 @@ if choice=='Login':
     if login:
         try:
             user=auth.sign_in_with_email_and_password(email,password)
+
         except:
             st.sidebar.header("Invalid Credentials")
         
         
+
+            st.balloons()
+        except:
+            st.sidebar.header("Invalid Credentials")
+
+        bio = st.radio('Jump to',['Home','My feed','Settings'])
+
