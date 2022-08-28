@@ -72,7 +72,7 @@ if choice=='Login':
         if bio == 'Home':
           @st.experimental_singleton
           def get_db():
-            key_dict = tomli.load(st.secrets1["textkey"])
+            key_dict = tomli.load(st.secrets["textkey"])
             creds = service_account.Credentials.from_service_account_info(key_dict)
             db = firestore.Client(credentials=creds, project="hackathon-57ace")
             return db
