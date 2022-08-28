@@ -3,3 +3,4 @@ Pyrebase4==4.5.0
 streamlit==1.12.2
 streamlit_elements==0.1.0
 tomli==2.0.1
+google-cloud-firestore
